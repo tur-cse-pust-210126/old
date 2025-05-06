@@ -1,0 +1,540 @@
+%% Lab 1.1 (example 1.1 exponential)
+clc; clear all; close all;
+x=0:0.2:2;
+x1=0:1:10;
+%continuous
+y1=2*exp(-2*x)
+subplot(2,1,1)
+plot(x,y1, 'r', LineWidth=2)
+xlabel('Value of variable')
+ylabel('Value of equation')
+title("Continuous Exponential Equation")
+grid minor
+
+%discrete
+subplot(2,1,2)
+stem(x1, y1, 'b', LineWidth=2)
+xlabel('Sampling Point')
+ylabel('Equation According to sampling point')
+title("Discrete Exponential Equation")
+grid minor
+
+%% Lab 1.2 (example 1.2 sinusoidal)
+clc; clear all; close all;
+x=0:0.2:2;
+x1=0:1:10;
+y=sin(7*x)+sin(10*x);
+
+%continuous
+subplot(2,1,1)
+plot(x,y,'r','LineWidth',2)
+xlabel('Values of X')
+ylabel('Values of Equation')
+title('Continuous Sinusoidal Equation')
+grid minor
+
+%discrete
+subplot(2,1,2)
+stem(x1,y,'b','LineWidth',2)
+xlabel('Sampling Points')
+ylabel('Equation According to sampling point')
+title('Discrete Sinusoidal Equation')
+grid minor
+
+%% Lab 1.3 (practice 1.1 exponential equation)
+clc; clear all; close all;
+x=-1:0.2:1;
+x1=0:1:10;
+y=exp(-(x.^2)/2);
+
+%Continuous
+subplot(2,1,1)
+plot(x,y,'r','LineWidth',2)
+xlabel('Values of X')
+ylabel('Values of Equation')
+title('Practice Problem 1.3Continuous')
+grid minor
+
+%Discrete
+subplot(2,1,2)
+stem(x1,y,'b','LineWidth',2)
+xlabel('Sampling Points')
+ylabel('Values of Equation')
+title('Practice Problem 1.3 Discrete')
+grid minor
+
+%% Lab 2.1 Elementary Signals (Unit Step Signal)
+
+clc; clear all; close all;
+t=(-5:0.5:5);
+t1=0:1:20;
+y=t>=0;
+
+%Continuous
+subplot(2,1,1)
+plot(t,y,'r','LineWidth',2)
+xlabel('Time')
+ylabel('Function')
+title('Unit Step Continuous')
+grid minor
+
+%Discrete
+subplot(2,1,2)
+stem(t1,y,'b','LineWidth',2)
+xlabel('Time')
+ylabel('Function')
+title('Unit Step Discrete')
+grid minor
+
+%% Lab 2.2 Elementary Signals (Unit Ramp Signal)
+
+clc; clear all; close all;
+t=(-5:0.5:5);
+t1=(0:1:20);
+y=(t>=0).*t;
+
+%Continuous
+subplot(2,1,1)
+plot(t,y,'r','LineWidth',2)
+xlabel('Time')
+ylabel('Function')
+title('Unit Ramp Continuous')
+grid minor
+
+%Discrete
+subplot(2,1,2)
+stem(t1,y,'b','LineWidth',2)
+xlabel('Time')
+ylabel('Function')
+title('Unit Ramp Discrete')
+grid minor
+
+%% Lab 2.3 Elementary Signals (Unit Impulse Signal)
+
+clc;
+clear all;
+close all;
+
+% Define time vectors
+t = -5:1:5;      % For continuous-style plotting
+t1 = 0:1:10;     % For discrete plotting
+
+% Unit Impulse Signal: delta(t) = 1 when t = 0, else 0
+y_continuous = (t == 0);  % Logical indexing: 1 only at t = 0
+y_discrete = (t1 == 0);   % Discrete version
+
+% Plot Continuous-style Impulse (for visualization)
+subplot(2,1,1)
+stem(t, y_continuous, 'r', 'LineWidth', 2)
+xlabel('Time')
+ylabel('Amplitude')
+title('Unit Impulse Signal (Continuous-style)')
+grid minor
+
+% Plot Discrete Impulse
+subplot(2,1,2)
+stem(t1, y_discrete, 'b', 'LineWidth', 2)
+xlabel('Time')
+ylabel('Amplitude')
+title('Unit Impulse Signal (Discrete)')
+grid minor
+
+ 
+%% Lab 2.4 Elementary Signals (Exponential Signal)
+clc; clear all; close all;
+n=2
+x=(-2:0.2:2);
+x1=(0:1:20);
+y=(n.^x);
+
+%continuous
+subplot(2,1,1)
+plot(x,y,'r','LineWidth',2)
+xlabel('Values of X')
+ylabel('The function')
+title('Exponential Signal Continuous')
+grid minor
+
+%Discrete
+subplot(2,1,2)
+stem(x1,y,'b','linewidth',2)
+xlabel('Values of X')
+ylabel('The Exponential Function')
+title('Exponential Signal Discrete')
+grid minor
+
+%% Lab 2.5 Elementary Signals (Sign Wave)
+clc; clear all; close all;
+A=input("Give the amplitude of a signal: ");
+f=input("Give the Frequency of a signal: ");
+t=input("Give the Duration of the Signal: ")
+
+fs=input("Give the sampling frequency of the signal: ");
+ %continuous 
+ t1=0:0.001:t;
+ y=A*sin(2*pi*f*t1)
+ subplot(2,1,1)
+ plot(t1,y,'r','LineWidth',2)
+ xlabel('Time')
+ ylabel('Amplitude')
+ title('Continuous Sinusoidal signal')
+ grid minor
+
+ %discrete
+ td=1/fs
+ t2=0:td:t
+ y1=A*sin(2*pi*f*t2)
+ subplot(2,1,2)
+ stem(t2, y1,'b','LineWidth',2)
+ xlabel('Time')
+ ylabel('Amplitude')
+ title('Sampled Sinusoidal Signal')
+ grid minor
+
+%% Lab 3.1 (Time Shifting)
+clc; clear all; close all;
+x = [ 0  0  0 2 1 2 1 0 0 0];
+n= -3:1:6;
+k= input("Enter the shiftig value: ")
+N=length(x)
+x_shifted=zeros(1,N)
+if k>0
+   x_shifted(k+1:N)=x(1:N-k)
+elseif k<0
+    x_shifted(1:N+k)=x(-k+1:N)
+else
+    x_shifted=x
+end
+n_shifted=n
+
+subplot(2,1,1)
+stem(n,x,'r',LineWidth=2)
+title('Original Signal x(n)')
+xlabel('Time Index (n)')
+ylabel('Amplitude')
+grid minor
+
+subplot(2,1,2)
+stem(n_shifted,x_shifted,'b',LineWidth=2)
+title('Shifted Signal x(n-k)')
+xlabel('Time Index (n)')
+ylabel('Amplitude')
+grid minor
+
+%% Lab 3.2 (Time Reversal)
+clc; clear all; close all;
+x = [ 0 0 0 0  0  0 2 1 2 1 0 0 0];
+n= -6:1:6;
+N=length(x)
+x_reversed=zeros(1,N)
+n_reversed=n
+for i=1:N
+    val_n=-n(i); %this will give the x(-n)
+    indx=find(n==val_n)
+    x_reversed(i)=x(indx)
+end
+
+subplot(2,1,1)
+stem(n,x,'r',LineWidth=2)
+title("Original Signal x(n)")
+xlabel("Time Index (n)")
+ylabel("Amplitude")
+grid minor
+
+subplot(2,1,2)
+stem(n_reversed,x_reversed,'b',LineWidth=2)
+title("Reversed Signal x(-n)")
+xlabel("Time Index (n)")
+ylabel("Amplitude")
+grid minor
+
+%% Lab 3.3 (Time Scaling)
+clc; clear all; close all;
+x = [ 0  0  0  0  1  2  3  4 5 4 3 2 1 0 0 0 0]
+n = [-8 -7 -6 -5 -4 -3 -2 -1 0 1 2 3 4 5 6 7 8]
+a=length(x)
+x_scaled=zeros(1,a)
+b=input("Enter the scaling value (lambda) : ")
+num2str(b)
+if b>1
+    for i=1:a
+        if x(i)~=0
+            val=b*n(i)
+            indx=find(n==val)
+            x_scaled(i)=x(indx)
+        end
+    end
+elseif b<1
+        for i=1:2:a
+                val=b*n(i)
+                indx=find(n==val)
+                x_scaled(i)=x(indx)
+        end
+else
+    x_scaled=x
+end
+n_scaled=n
+
+subplot(2,1,1)
+stem(n,x,'r',LineWidth=2)
+title("Original Signal x(n)")
+xlabel('Time Index (n)')
+ylabel('Amplitude')
+grid minor
+
+subplot(2,1,2)
+stem(n_scaled,x_scaled,'b',LineWidth=2)
+if b>1
+    title("Scaled Signal x(n*labmda)")
+elseif b<1
+        title("Scaled Signal x(n/lambda)")
+else
+    title("Scaled Signal x(n)")
+end
+xlabel('Time Index (n)')
+ylabel('Amplitude')
+grid minor
+
+%% 4.1 Convolution Sum
+clc;clear all; close all;
+x = input('Enter x(n) as a vector (e.g [1 2 3 4]): ')
+n_x_start = input('Enter x(n) start index: ')
+h = input('Enter h(n) as a vector (e.g [1 2 3 4]): ')
+n_h_start = input('Enter h(n) start index: ')
+n_x = n_x_start : n_x_start + length(x) - 1
+n_h = n_h_start : n_h_start + length(h) - 1
+n_y_start = n_x(1) + n_h(1)
+n_y_end = n_x(end) + n_h(end)
+n_y = n_y_start : n_y_end
+y = zeros(1, length(n_y))
+for n = 1:length(n_y)
+    current_n = n_y(n)
+    for k = 1:length(n_x)
+        h_index = current_n - n_x(k)
+        h_pos = find(n_h == h_index)
+        if ~isempty(h_pos)
+            y(n) = y(n) + x(k) * h(h_pos)
+        end
+    end
+end
+disp('Convolution result y(n):')
+disp(y)
+disp('Time indices n:')
+disp(n_y)
+
+subplot(3,1,1)
+stem(n_x, x, 'r', 'LineWidth', 2)
+title('Original x(n)')
+xlabel('Time'); ylabel('Amplitude')
+grid minor
+
+subplot(3,1,2)
+stem(n_h, h, 'b', 'LineWidth', 2)
+title('Impulse Signalh(n)')
+xlabel('Time')
+ylabel('Amplitude')
+grid minor
+
+subplot(3,1,3)
+stem(n_y, y, 'g', 'LineWidth', 2)
+title('Convoluted Signal y(n) = x(n) * h(n)')
+xlabel('Time')
+ylabel('Amplitude')
+grid minor
+
+%% 4.2 Correlation
+clc; clear all; close all;
+x = input('Enter sequence x(n) as a vector: ')
+n_x_start = input('Enter starting index for x(n): ')
+h = input('Enter sequence h(n) as a vector: ')
+n_h_start = input('Enter starting index for h(n): ')
+n_x = n_x_start : n_x_start + length(x) - 1
+n_h = n_h_start : n_h_start + length(h) - 1
+h_reversed = fliplr(h)
+n_h_reversed = -fliplr(n_h)
+corr_length = length(x) + length(h) - 1
+n_corr_start = n_x(1) + n_h_reversed(1)
+n_corr = n_corr_start : n_corr_start + corr_length - 1
+corr_result = zeros(1, corr_length)
+for k = 1:corr_length
+    current_n = n_corr(k)
+    sum_val = 0
+    for m = 1:length(x)
+        h_index = current_n - n_x(m);
+        h_pos = find(n_h_reversed == h_index)      
+        if ~isempty(h_pos)
+            sum_val = sum_val + x(m) * h_reversed(h_pos)
+        end
+    end
+    corr_result(k) = sum_val
+end
+disp('Correlation result:')
+disp(corr_result)
+disp('Time indices:')
+disp(n_corr)
+
+subplot(3,1,1)
+stem(n_x, x, 'r', 'LineWidth', 2)
+title('Input Sequence x(n)')
+xlabel('Time index n')
+ylabel('Amplitude')
+grid minor
+
+subplot(3,1,2)
+stem(n_h, h, 'b', 'LineWidth', 2)
+title('Time-Reversed h(-n)')
+xlabel('Time index n')
+ylabel('Amplitude')
+grid on
+
+subplot(3,1,3)
+stem(n_corr, corr_result, 'g', 'LineWidth', 2)
+title('Correlation Result')
+xlabel('Time index n')
+ylabel('Amplitude')
+grid on
+
+%% 5.1 Composite Signal
+clc; clear all; close all;
+fs = input('Enter sampling frequency (Hz): ')
+L = input('Enter number of samples: ')
+f1 = input('Enter frequency of Signal 1 (Hz): ')
+f2 = input('Enter frequency of Signal 2 (Hz): ')
+f3 = input('Enter frequency of Signal 3 (Hz): ')
+A = input('Enter amplitude: ')
+t = (0:L-1)/fs
+
+s1 = A * sin(2*pi*f1*t)
+s2 = A * sin(2*pi*f2*t)
+s3 = A * sin(2*pi*f3*t)
+s = s1 + s2 + s3
+
+figure
+subplot(4,1,1)
+plot(t, s1, 'b','LineWidth',2)
+title(['Signal 1: ', num2str(f1), ' Hz'])
+xlabel('Time (s)') 
+ylabel('Amplitude')
+
+subplot(4,1,2)
+plot(t, s2, 'g','LineWidth',2)
+title(['Signal 2: ', num2str(f2), ' Hz'])
+xlabel('Time (s)')
+ylabel('Amplitude')
+
+subplot(4,1,3)
+plot(t, s3, 'r','LineWidth',2)
+title(['Signal 3: ', num2str(f3), ' Hz'])
+xlabel('Time (s)') 
+ylabel('Amplitude')
+
+subplot(4,1,4)
+plot(t, s, 'm', 'LineWidth',2)
+title(['Composite Signal (', num2str(f1), ' + ', num2str(f2), ' + ', num2str(f3), ') Hz'])
+xlabel('Time (s)') 
+ylabel('Amplitude')
+
+%% 5.2 FFT and IFFT of the signal
+clc; close all;
+S = fft(s)
+f = (0:L-1)*(fs/L)
+si = ifft(S)
+
+figure;
+subplot(2,1,1)
+stem(f(1:L/2), abs(S(1:L/2))/L, 'g', 'LineWidth', 2)
+title('Frequency Spectrum (DFT)')
+xlabel('Frequency (Hz)')
+ylabel('Magnitude')
+grid minor
+
+subplot(2,1,2)
+plot(t, real(si), 'r', 'LineWidth', 2)
+title('Reconstructed Signal')
+xlabel('Time (s)')
+ylabel('Amplitude')
+grid minor
+
+%% 5.3 real part, imaginary part, magnitude, and phase angle of a signal.
+
+clc; close all;
+
+x = S  
+N = length(x)
+m = 0:N-1
+
+X_real = zeros(1, N)
+X_imag = zeros(1, N)
+X_mag  = zeros(1, N)
+X_phase = zeros(1, N)
+X_power = zeros(1, N)
+
+for k = 1:N
+     re = (x(k) + conj(x(k))) / 2          
+    
+   im = (x(k) - conj(x(k))) / (2i)
+
+    X_real(k) = re
+    X_imag(k) = im
+    X_mag(k) = sqrt(re^2 + im^2)
+
+    if re == 0 && im == 0
+        X_phase(k) = 0
+    else
+        X_phase(k) = atan2(im, re) * (180/pi)
+    end
+
+    X_power(k) = re^2 + im^2
+end
+
+disp('Index (k) | Real | Imag | Magnitude | Phase (deg) | Power')
+for k = 1:N
+    fprintf('%9d | %6.2f | %6.2f | %9.2f | %11.2f | %7.2f\n', ...
+        k-1, X_real(k), X_imag(k), X_mag(k), X_phase(k), X_power(k))
+end
+
+m = 0:N-1
+figure
+
+subplot(3,2,1)
+stem(m, X_real, 'filled', 'Color', 'b','LineWidth',2)
+title('Real Part of DFT: Re{X(k)}')
+xlabel('Frequency Index (k)')
+ylabel('Re{X(k)}')
+grid minor
+
+subplot(3,2,2)
+stem(m, X_imag, 'filled', 'Color', 'r','LineWidth',2)
+title('Imaginary Part of DFT: Im{X(k)}')
+xlabel('Frequency Index (k)')
+ylabel('Im{X(k)}')
+grid minor
+
+subplot(3,2,3)
+stem(m, X_mag, 'filled', 'Color', 'g', 'LineWidth',2)
+title('Magnitude Spectrum: |X(k)|')
+xlabel('Frequency Index (k)')
+ylabel('|X(k)|')
+grid minor
+
+subplot(3,2,4)
+stem(m, X_phase, 'filled', 'Color', 'm')
+title('Phase Spectrum: ∠X(k) in Degrees')
+xlabel('Frequency Index (k)')
+ylabel('Angle (degrees)')
+grid minor
+
+subplot(3,2,5)
+stem(m, X_power, 'filled', 'Color', 'c', 'LineWidth',2)
+title('Power Spectrum: |X(k)|^2')
+xlabel('Frequency Index (k)')
+ylabel('Power')
+grid minor
+
+subplot(3,2,6)
+stem(f(1:L/2), abs(S(1:L/2))/L, 'Color','y', 'LineWidth',2)  
+% Plot s (original signal), not x (FFT)
+title('Original Time-Domain Signal: s[n]')
+xlabel('Time Index (n)')
+ylabel('Amplitude')
+grid minor
